@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link class="icone" rel="icon" href="img/icone.png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <style>
+        body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
+
+#form_header {
+    background-color: #cdacaa;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #bf8b86;
+    
+}
+
+#form_header a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#inputs {
+    padding: 20px;
+}
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-field {
+    position: relative;
+}
+
+.input-field i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    color: #a8a29e;
+}
+
+.input-field input {
+    width: calc(100% - 40px);
+    padding: 10px;
+    padding-left: 40px;
+    border: 1px solid #a8a29e;
+    border-radius: 5px;
+    outline: none;
+}
+
+#forgot_password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#forgot_password a {
+    text-decoration: none;
+    color: #a66454;
+}
+
+#forgot_password a:hover {
+    text-decoration: underline;
+}
+
+#submit_button {
+    background-color: #bf8b86;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#submit_button:hover {
+    background-color: #a07573;
+}
+
+#mode_icon {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.dark {
+    background-color: #31201e;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    #container {
+        border-radius: 0;
+    }
+}
+
+    </style> -->
+
+    <title>Enter Code - Emaus</title>
+</head>
+<body>
+    <main id="container_login">
+        <form id="login_form">
+            <div id="form_header">
+                <a><h1>emaús</h1></a>
+                <i id="mode_icon" class="fa-solid fa-moon"></i>
+            </div>
+
+                <div class="input-box">
+                    <label for="recovery_code">
+                        Insira o código de recuperação que você recebeu por e-mail
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="text" id="recovery_code" name="recovery_code" required>
+                        </div>
+                    </label>
+                
+
+                <div id="forgot_password">
+                    <a href="loginemaus.html">Voltar para login</a>
+                </div>
+                <div id="forgot_password">
+                    <a href="index.html">Cancelar</a>
+                </div>
+            </div>
+            
+
+            <button type="submit" id="login_button">
+                Verificar Código
+            </button>
+        </form>
+    </main>
+
+    <script>
+        const mode = document.getElementById('mode_icon');
+        const form = document.getElementById('code_form');
+
+        mode.addEventListener('click', () => {
+            if (mode.classList.contains('fa-moon')) {
+                mode.classList.remove('fa-moon');
+                mode.classList.add('fa-sun');
+                form.classList.add('dark');
+            } else {
+                mode.classList.add('fa-moon');
+                mode.classList.remove('fa-sun');
+                form.classList.remove('dark');
+            }
+        });
+
+        form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const enteredCode = document.getElementById('recovery_code').value;
+
+    // Obter o código armazenado em sessionStorage
+    const expectedCode = sessionStorage.getItem('recoveryCode');
+
+    if (enteredCode && expectedCode && enteredCode.trim() === expectedCode.trim()) {
+        alert('Código verificado com sucesso! Redirecionando para redefinição de senha');
+        // Remover o código de sessionStorage após o uso
+        sessionStorage.removeItem('recoveryCode');
+        // Redirect the user to the login page
+        window.location.href = 'meuloginemaus.html';
+    } else {
+        alert('Código inválido. Tente novamente.');
+    }
+});
+
+
+
+    </script>
+</body>
+</html>
